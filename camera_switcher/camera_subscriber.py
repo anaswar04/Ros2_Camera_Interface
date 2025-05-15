@@ -12,7 +12,7 @@ class CameraSubscriber(Node):
 
         self.subscription = self.create_subscription(
             Image,
-            'camera/image_raw',  # Topic to subscribe to
+            'camera/image_raw',  
             self.listener_callback,
             10
         )
@@ -20,10 +20,9 @@ class CameraSubscriber(Node):
         self.get_logger().info('🟢 Camera subscriber started. Waiting for frames...')
 
     def listener_callback(self, msg):
-        # Convert ROS Image message to OpenCV image
+        
         frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
 
-        # Show image in OpenCV window
         cv2.imshow('Camera Feed', frame)
         cv2.waitKey(1)
 
@@ -35,7 +34,6 @@ def main(args=None):
     except KeyboardInterrupt:
         pass
     finally:
-        # Close the OpenCV window cleanly
         cv2.destroyAllWindows()
         node.destroy_node()
         rclpy.shutdown()
