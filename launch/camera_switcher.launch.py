@@ -11,14 +11,12 @@ from ament_index_python.packages import get_package_share_directory
 def launch_setup(context, *args, **kwargs):
     camera_name = LaunchConfiguration('camera_name').perform(context)
 
-    # Load YAML
     package_dir = get_package_share_directory('camera_switcher')
     yaml_path = os.path.join(package_dir, 'camera_params.yaml')
 
     with open(yaml_path, 'r') as f:
         camera_map = yaml.safe_load(f)['camera_map']
 
-    # Find camera_id from map
     if camera_name not in camera_map:
         raise RuntimeError(f"Camera name '{camera_name}' not found in YAML map")
 
