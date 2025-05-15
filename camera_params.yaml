@@ -1,0 +1,4 @@
+camera_map:
+  front: 0
+  rear: 1
+  side: 2
